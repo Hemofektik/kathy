@@ -44,14 +44,19 @@
       event.preventDefault();
       event.stopPropagation();
     },
+    clearPatient: function(event) {
+      this.setState(this.getInitialState());
+    },
     render: function() {
       
       var patient = new Patient({});
-      if( patient.get_patient_to_edit() != null ) {
-        this.state = patient.get_patient_to_edit();
+      var patient_to_edit = patient.get_and_clear_patient_to_edit();
+      if( patient_to_edit != null ) {
+        this.state = patient_to_edit;
       }
 
       var disabled = this.isDisabled();
+      var exists = (this.state["id"] !== undefined);
       return (
         <form role="form" onSubmit={this.addPatient}>
           <div className="row">
@@ -84,13 +89,19 @@
                 <option>UKG</option>
               </select>
             </div>
-            <div className="col-sm-2">
+            <div className="col-sm-1">
               <label className="sr-only" htmlFor="room">Patient</label>
               <input type="text" className="form-control" name="room" value={this.state.room}
                 placeholder="Room" onChange={this.handleNewRoom} />
             </div>
-            <div className="col-sm-1">
-              <button type="submit" className="btn btn-default form-control" disabled={disabled}>Add</button>
+            <div className="col-sm-2">
+            
+            <button type="submit" className="btn" disabled={disabled}> <i className="fa fa-save"></i></button>
+            {
+                exists
+                ? <button type="button" onClick={this.clearPatient} className="btn" ><i className="fa fa-file-o"></i></button> 
+                : null
+            }
             </div>
           </div>
         </form>
@@ -98,6 +109,7 @@
     },
     getInitialState: function() {
       return {
+        id: undefined, 
         name: "",
         station: "Achi",
         room: "",

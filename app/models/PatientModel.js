@@ -41,8 +41,10 @@
       }
       this.publish(data);
     },
-    get_patient_to_edit: function() {
-      return patient_to_edit;
+    get_and_clear_patient_to_edit: function() {
+      var old_patient_to_edit = patient_to_edit;
+      patient_to_edit = null;
+      return old_patient_to_edit;
     }
   };
   
@@ -66,8 +68,8 @@
       statics.save(this);
     };
 
-    this.get_patient_to_edit = function() {
-      return statics.get_patient_to_edit();
+    this.get_and_clear_patient_to_edit = function() {
+      return statics.get_and_clear_patient_to_edit();
     };
   };
   

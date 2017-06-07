@@ -9,7 +9,7 @@
   var Patient = require('../models/PatientModel.js');
   module.exports = React.createClass({
     isDisabled:  function() {
-      return _.isBlank(this.state.name) || _.isBlank(this.state.station) || _.isBlank(this.state.room);
+      return _.isBlank(this.state.name) || _.isBlank(this.state.room);
     },
     handleNewName: function(event) {
       this.setState(_.extend(this.state, {
@@ -51,7 +51,7 @@
       
       var patient = new Patient({});
       var patient_to_edit = patient.get_and_clear_patient_to_edit();
-      if( patient_to_edit != null ) {
+      if( patient_to_edit !== null ) {
         this.state = patient_to_edit;
       }
 
@@ -108,8 +108,8 @@
       );
     },
     getInitialState: function() {
-      return {
-        id: undefined, 
+      return { 
+        id: undefined,
         name: "",
         station: "Achi",
         room: "",

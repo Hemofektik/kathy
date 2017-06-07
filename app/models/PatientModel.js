@@ -1,7 +1,7 @@
 (function(_) {
   var LSService = require('../services/LSService.js'),
       data = LSService.read(),
-      patient_to_edit = {};
+      patient_to_edit = null;
   
   var statics = {
     subscribers: [],

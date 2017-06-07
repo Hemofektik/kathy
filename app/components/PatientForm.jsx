@@ -67,7 +67,7 @@
             </div>
             <div className="col-sm-2">
               <label className="sr-only" htmlFor="init_date">Anlage</label>
-              <input type="date" className="form-control" name="name" value={this.state.init_date}
+              <input type="date" className="form-control" name="init_date" value={this.state.init_date}
                  onChange={this.handleNewInitDate} />
             </div>
             <div className="col-sm-2">

@@ -39,24 +39,25 @@
     addPatient: function(event) {
       var patient = new Patient(this.state);
       patient.save();
-      this.setState(this.getInitialState());
+
+      if(this.props.initial_patient === undefined) {
+        this.setState(this.getInitialState());
+      }
 
       event.preventDefault();
       event.stopPropagation();
     },
-    clearPatient: function(event) {
+    close: function(event) {
       this.setState(this.getInitialState());
+
+      if(this.props.close_callback) {
+        this.props.close_callback();
+      }
     },
     render: function() {
-      
-      var patient = new Patient({});
-      var patient_to_edit = patient.get_and_clear_patient_to_edit();
-      if( patient_to_edit !== null ) {
-        this.state = patient_to_edit;
-      }
-
-      var disabled = this.isDisabled();
-      var exists = (this.state["id"] !== undefined);
+      var disable_save = this.isDisabled();
+      var disable_date = (this.props.initial_patient !== undefined);
+      var show_delete_date = (this.props.initial_patient !== undefined);
       return (
         <form role="form" onSubmit={this.addPatient}>
           <div className="row">
@@ -68,7 +69,7 @@
             <div className="col-sm-2">
               <label className="sr-only" htmlFor="init_date">Anlage</label>
               <input type="date" className="form-control" name="init_date" value={this.state.init_date}
-                 onChange={this.handleNewInitDate} />
+                 onChange={this.handleNewInitDate} disabled={disable_date}/>
             </div>
             <div className="col-sm-2">
               <label className="sr-only" htmlFor="station">Station</label>
@@ -96,18 +97,28 @@
             </div>
             <div className="col-sm-2">
             
-            <button type="submit" className="btn" disabled={disabled}> <i className="fa fa-save"></i></button>
-            {
-                exists
-                ? <button type="button" onClick={this.clearPatient} className="btn" ><i className="fa fa-file-o"></i></button> 
-                : null
+            {show_delete_date ?
+            <button type="button" className="btn btn-danger pull-left" onClick={this.deletePatient}>
+              <i className="fa fa-trash-o"></i>
+            </button> : null
             }
+            <button type="button" className="btn pull-right" onClick={this.close}  ><i className="fa fa-close"></i></button>
+            
+            <button type="submit" className="btn pull-right" disabled={disable_save}> <i className="fa fa-save"></i></button>
             </div>
           </div>
         </form>
       );
     },
+    deletePatient: function() {
+      this.props.initial_patient.delete();
+    },
     getInitialState: function() {
+      if(this.props.initial_patient !== undefined)
+      {
+        return this.props.initial_patient;
+      }
+
       return { 
         id: undefined,
         name: "",

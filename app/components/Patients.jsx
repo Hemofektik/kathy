@@ -23,7 +23,7 @@
                 <div className="col-sm-2">
                   <strong>{this.state.next_date_text}</strong>
                 </div>
-                <div className="col-sm-2">
+                <div className="pull-right">
                   <button type="button" className="btn" onClick={this.scrollLeft}>
                     <i className="fa fa-arrow-left"></i>
                   </button>
@@ -39,14 +39,14 @@
           </thead>
           <tbody>
             {
-              this.props.data.filter( function filterByID(obj) {
+              this.props.data.filter( function filterByDate(obj) {
                 return obj.samples.some( function(sample)
                   {
                     var date_time = new Date(sample.date_time).getTime();
                     return ( date_time >= min_date && date_time <= max_date );
                   });
                 }).map(function(patient) {
-                  return <Patient key={patient.id} data={patient}/>;
+                  return <Patient key={patient.id} data={patient} min_date={min_date} max_date={max_date} />;
                 })
             }
           </tbody>

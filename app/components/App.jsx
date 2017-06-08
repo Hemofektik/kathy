@@ -17,6 +17,7 @@
           
           {alert}
           <Patients data={this.props.patients} />
+          <label>Neuer Patient</label>
           <PatientForm />
         </div>
       );

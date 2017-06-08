@@ -1,9 +1,11 @@
 (function(React, module, undefined) {
+  var PatientForm = require('./PatientForm.jsx');
   var PatientSample = require('./PatientSample.jsx');
   module.exports = React.createClass({
     render: function() {
       return (
         <div>
+          <PatientForm initial_patient={this.props.data} close_callback={this.props.close_callback} />
           <hr/>
           <div className="col-sm-5">
             <label>Bedingungen / Besonderheiten</label>

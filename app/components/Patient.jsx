@@ -31,7 +31,7 @@
 
             {
                 this.state.show_info
-                ? <PatientInfo data={this.props.data} />  
+                ? <PatientInfo data={this.props.data}/>  
                 : null
             }
 

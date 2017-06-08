@@ -6,7 +6,7 @@
           <td>
             <div className="row">
               <div className="col-sm-2">
-                <strong>{this.props.data.date_time}</strong><br />
+                <strong>Date: {this.props.data.date_time}</strong><br />
                 <small>{this.props.data.station} {this.props.data.room}</small>
               </div>
             </div>

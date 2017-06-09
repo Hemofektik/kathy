@@ -1,11 +1,5 @@
 (function(React, _) {
 
-  Date.prototype.toDateInputValue = (function() {
-      var local = new Date(this);
-      local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-      return local.toJSON().slice(0,10);
-  });
-
   var Patient = require('../models/PatientModel.js');
   module.exports = React.createClass({
     isDisabled:  function() {
@@ -32,8 +26,13 @@
       }));
     },
     handleNewInitDate: function(event) {
+      var old_date = new Date(this.state.init_date);
+      var new_date = new Date(event.target.value);
+      new_date.setHours(old_date.getHours());
+      new_date.setMinutes(old_date.getMinutes());
+      var new_init_date = new_date.toJSON();
       this.setState(_.extend(this.state, {
-        init_date: event.target.value
+        init_date: new_init_date
       }));
     },
     addPatient: function(event) {
@@ -57,7 +56,8 @@
     render: function() {
       var disable_save = this.isDisabled();
       var disable_date = (this.props.initial_patient !== undefined);
-      var show_delete_date = (this.props.initial_patient !== undefined);
+      var show_delete_btn = (this.props.initial_patient !== undefined);
+      var init_date = this.state.init_date.slice(0,10);
       return (
         <form role="form" onSubmit={this.addPatient}>
           <div className="row">
@@ -68,7 +68,7 @@
             </div>
             <div className="col-sm-2">
               <label className="sr-only" htmlFor="init_date">Anlage</label>
-              <input type="date" className="form-control" name="init_date" value={this.state.init_date}
+              <input type="date" className="form-control" name="init_date" value={init_date}
                  onChange={this.handleNewInitDate} disabled={disable_date}/>
             </div>
             <div className="col-sm-2">
@@ -97,7 +97,7 @@
             </div>
             <div className="col-sm-2">
             
-            {show_delete_date ?
+            {show_delete_btn ?
             <button type="button" className="btn btn-danger pull-left" onClick={this.deletePatient}>
               <i className="fa fa-trash-o"></i>
             </button> : null
@@ -116,7 +116,7 @@
     getInitialState: function() {
       if(this.props.initial_patient !== undefined)
       {
-        return this.props.initial_patient;
+        return JSON.parse(JSON.stringify(this.props.initial_patient));
       }
 
       return { 
@@ -124,7 +124,7 @@
         name: "",
         station: "Achi",
         room: "",
-        init_date: new Date().toDateInputValue(),
+        init_date: new Date().toJSON(),
         kath_type: "PDK" 
       };
     }

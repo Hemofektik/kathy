@@ -23,22 +23,48 @@
                 </div>
               </div>
               <div className="form-group">
-                <label className="col-lg-3">LOR</label>
-                <div className="col-lg-9">
+                <label className="col-lg-8">LOR (mm)</label>
+                <div className="col-lg-4">
                   <input type="text" className="form-control" name="lor" value={this.props.data.edk_height}
-                      placeholder="z.b. 65 mm" onChange={this.handleNewEDKHeight} />
+                      placeholder="z.b. 65" onChange={this.handleNewEDKHeight} />
                 </div>
               </div>
               <div className="form-group">
-                <label className="col-lg-6">Einlagetiefe. inkl. Tunnel:</label>
-                <div className="col-lg-6">
+                <label className="col-lg-8">Einlagetiefe. inkl. Tunnel (mm)</label>
+                <div className="col-lg-4">
                   <input type="text" className="form-control" name="intrusion_depth" value={this.props.data.intrusion_depth}
-                      placeholder="z.b. 130 mm" onChange={this.handleNewIntrusionDepth} />
+                      placeholder="z.b. 130" onChange={this.handleNewIntrusionDepth} />
                 </div>
               </div>
             </div>
             <hr/>
             <table className="table table-striped table-condensed">
+            <thead>
+              <tr>                
+                <td>
+                  <div className="col-sm-2">
+                  <label>Datum Uhrzeit</label>
+                  </div>
+                  <div className="col-sm-2">
+                    <label>PSN</label>
+                  </div>
+                  <div className="col-sm-2">
+                    <label>Vorgang</label>
+                  </div>
+                  <div className="pull-right">
+                    <button type="button" className="btn" onClick={this.scrollLeft}>
+                      <i className="fa fa-arrow-left"></i>
+                    </button>
+                    <button type="button" className="btn" onClick={this.scrollRight}>
+                      <i className="fa fa-arrow-right"></i>
+                    </button>
+                    <button type="button" className="btn" onClick={this.scrollHome}>
+                      <i className="fa fa-home"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </thead>
             <tbody>
               {this.props.data.samples.map(function(sample) {
                 return <PatientSample key={sample.id} data={sample}/>;

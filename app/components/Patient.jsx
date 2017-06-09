@@ -4,6 +4,8 @@
   module.exports = React.createClass({
     render: function() {
 
+      var init_date = new Date(this.props.data.init_date).toLocaleDateString();
+
       var day0_start = this.props.min_date;
       var day0_end = new Date(day0_start.getTime());
       day0_end.setHours(day0_end.getHours() + 24, 0, 0, 0);
@@ -31,7 +33,7 @@
                 <small>{this.props.data.station} {this.props.data.room}</small>
               </div>
               <div className="col-sm-2">
-                {this.props.data.init_date}<br />
+                {init_date}<br />
                 <small>{this.props.data.kath_type}</small>
               </div>
               <div className="col-sm-2">

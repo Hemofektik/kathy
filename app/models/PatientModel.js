@@ -46,12 +46,10 @@
     this.kath_type = patient.kath_type || "";
     this.init_date = patient.init_date || "";
     this.score = patient.score || 0;
-    this.samples = patient.samples || [
-      { 
+    this.samples = patient.samples || [{ 
         date_time: this.init_date,
         process: "Anlage" 
-      }
-      ];
+      }];
     
     this.delete = function() {
       statics.delete(this);

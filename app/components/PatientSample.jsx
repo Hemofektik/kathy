@@ -47,9 +47,16 @@
 
       this.setState(this.state);
     },
+    handleNewProcess: function(event) {
+      this.props.data.process = event.target.value;
+      this.setState(this.state);
+    },
+    handleNewPSN: function(event) {
+      this.props.data.psn = event.target.value;
+      this.setState(this.state);
+    },    
     getInitialState: function() {
       return { 
-        show_info: false 
       };
     }
   });

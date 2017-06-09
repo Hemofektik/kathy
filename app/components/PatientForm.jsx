@@ -1,6 +1,8 @@
 (function(React, _) {
 
   var Patient = require('../models/PatientModel.js');
+  var PatientSample = require('./PatientSample.jsx');
+
   module.exports = React.createClass({
     isDisabled:  function() {
       return _.isBlank(this.state.name) || _.isBlank(this.state.room);
@@ -36,6 +38,7 @@
       }));
     },
     addPatient: function(event) {
+      this.state.samples = this.samples; 
       var patient = new Patient(this.state);
       patient.save();
 
@@ -54,9 +57,31 @@
       }
     },
     render: function() {
+
+      this.samples = [];
+      
+      if(this.props.initial_patient !== undefined) {
+        this.samples = this.state.samples.slice(); // copy array
+
+        if(this.samples.length == 0)
+        {
+          var default_patient = new Patient({init_date: new Date().toJSON()});
+          this.samples.push(default_patient.samples[0]);
+        }
+        else if (!_.isBlank(this.samples[this.samples.length - 1].psn))
+        {
+          var new_init_date = new Date(this.samples[this.samples.length - 1].date_time);
+          new_init_date.setHours(new_init_date.getHours() + 24, 0, 0); // goto next day automatically
+          var default_patient = new Patient({init_date: new_init_date.toJSON()});
+          this.samples.push(default_patient.samples[0]);
+        }
+      }
+
+
       var disable_save = this.isDisabled();
       var disable_date = (this.props.initial_patient !== undefined);
       var show_delete_btn = (this.props.initial_patient !== undefined);
+      var show_patient_info = (this.props.initial_patient !== undefined);
       var init_date = this.state.init_date.slice(0,10);
       return (
         <form role="form" onSubmit={this.addPatient}>
@@ -107,6 +132,66 @@
             <button type="submit" className="btn pull-right" disabled={disable_save}> <i className="fa fa-save"></i></button>
             </div>
           </div>
+
+          {show_patient_info ?
+          <div>
+            <hr/>
+
+            <div className="col-sm-5">
+              <label>Bedingungen / Besonderheiten</label>
+                <textarea rows="3" className="form-control" name="name" value={this.state.conditions}
+                        placeholder="z.b. komplikationslose Anlage" onChange={this.handleNewConditions} >
+                </textarea>
+              </div>
+              <div className="col-sm-5">
+                <div className="form-group">
+                  <label className="col-lg-3">Höhe EDK</label>
+                  <div className="col-lg-9">
+                    <input type="text" className="form-control" name="edk_height" value={this.state.edk_height}
+                        placeholder="z.b. THB" onChange={this.handleNewEDKHeight} />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="col-lg-8">LOR (mm)</label>
+                  <div className="col-lg-4">
+                    <input type="text" className="form-control" name="lor" value={this.state.edk_height}
+                        placeholder="z.b. 65" onChange={this.handleNewEDKHeight} />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="col-lg-8">Einlagetiefe. inkl. Tunnel (mm)</label>
+                  <div className="col-lg-4">
+                    <input type="text" className="form-control" name="intrusion_depth" value={this.state.intrusion_depth}
+                        placeholder="z.b. 130" onChange={this.handleNewIntrusionDepth} />
+                  </div>
+                </div>
+              </div>
+              <hr/>
+              <table className="table table-striped table-condensed">
+              <thead>
+                <tr>                
+                  <td>
+                    <div className="col-sm-2">
+                    <label>Datum Uhrzeit</label>
+                    </div>
+                    <div className="col-sm-2">
+                      <label>PSN</label>
+                    </div>
+                    <div className="col-sm-2">
+                      <label>Vorgang</label>
+                    </div>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                {this.samples.map(function(sample) {
+                  return <PatientSample key={sample.date_time} data={sample}/>;
+                })}
+              </tbody>
+            </table>
+          </div>
+           : null
+          }
         </form>
       );
     },
@@ -116,7 +201,7 @@
     getInitialState: function() {
       if(this.props.initial_patient !== undefined)
       {
-        return JSON.parse(JSON.stringify(this.props.initial_patient));
+        return JSON.parse(JSON.stringify(this.props.initial_patient)); // create deep copy
       }
 
       return { 

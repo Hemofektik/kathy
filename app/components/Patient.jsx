@@ -14,11 +14,11 @@
 
       var sample_day0 = this.props.data.samples.find(function(sample) {
         var sample_date_time = new Date(sample.date_time);
-        return sample_date_time >= day0_start && sample_date_time < day0_end;
+        return !_.isBlank(sample.psn) && sample_date_time >= day0_start && sample_date_time < day0_end;
       });
       var sample_day1 = this.props.data.samples.find(function(sample) {
         var sample_date_time = new Date(sample.date_time);
-        return sample_date_time >= day0_end && sample_date_time < day1_end;
+        return !_.isBlank(sample.psn) && sample_date_time >= day0_end && sample_date_time < day1_end;
       });
 
       var process_day0 = sample_day0 ? sample_day0.process : "";

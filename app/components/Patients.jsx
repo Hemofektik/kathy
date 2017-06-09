@@ -43,7 +43,7 @@
                 return obj.samples.some( function(sample)
                   {
                     var date_time = new Date(sample.date_time).getTime();
-                    return ( date_time >= min_date && date_time <= max_date );
+                    return !_.isBlank(sample.psn) && ( date_time >= min_date && date_time <= max_date );
                   });
                 }).map(function(patient) {
                   return <Patient key={patient.id} data={patient} min_date={min_date} max_date={max_date} />;

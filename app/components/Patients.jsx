@@ -40,10 +40,11 @@
           <tbody>
             {
               this.props.data.filter( function filterByDate(obj) {
+                var has_only_one_sample = (obj.samples.length == 1);
                 return obj.samples.some( function(sample)
                   {
                     var date_time = new Date(sample.date_time).getTime();
-                    return !_.isBlank(sample.psn) && ( date_time >= min_date && date_time <= max_date );
+                    return (!_.isBlank(sample.psn) || has_only_one_sample) && ( date_time >= min_date && date_time <= max_date );
                   });
                 }).map(function(patient) {
                   return <Patient key={patient.id} data={patient} min_date={min_date} max_date={max_date} />;

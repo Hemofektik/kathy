@@ -38,7 +38,9 @@
       }));
     },
     addPatient: function(event) {
-      this.state.samples = this.samples; 
+      if(this.samples.length > 0) {
+        this.state.samples = this.samples;
+      } 
       var patient = new Patient(this.state);
       patient.save();
 

@@ -48,7 +48,7 @@
     this.score = patient.score || 0;
     this.samples = patient.samples || [{ 
         date_time: this.init_date,
-        process: "Anlage",
+        process: "",
         psn: "" 
       }];
     

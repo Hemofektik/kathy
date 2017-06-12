@@ -23,15 +23,17 @@
                   placeholder="Name" onChange={this.handleNewPSN} />
               </div>
               <div className="col-sm-2">
-                <select size="1" className="form-control" name="process" value={this.props.data.process}
-                  onChange={this.handleNewProcess} >
+                <input type="text" list="processes" 
+                    className="form-control" name="process" value={this.props.data.process}
+                    onChange={this.handleNewProcess} />
+                <datalist id="processes">
                   <option>Anlage</option>
-                  <option>VW</option>
-                  <option>AV</option>
-                  <option>%</option>
-                  <option>% AV</option>
-                  <option>% V</option>
-                </select>
+                    <option>VW</option>
+                    <option>AV</option>
+                    <option>%</option>
+                    <option>% AV</option>
+                    <option>% V</option>
+                </datalist>
               </div>
 
             </div>

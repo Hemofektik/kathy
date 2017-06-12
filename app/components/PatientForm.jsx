@@ -73,7 +73,7 @@
         else if (!_.isBlank(this.samples[this.samples.length - 1].psn))
         {
           var new_init_date = new Date(this.samples[this.samples.length - 1].date_time);
-          new_init_date.setHours(new_init_date.getHours() + 24, 0, 0); // goto next day automatically
+          new_init_date.setHours(new_init_date.getHours() + 24, new_init_date.getMinutes(), 0); // goto next day automatically
           var default_patient = new Patient({init_date: new_init_date.toJSON()});
           this.samples.push(default_patient.samples[0]);
         }

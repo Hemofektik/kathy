@@ -102,11 +102,12 @@
               <label className="sr-only" htmlFor="station">Station</label>
               <select size="1" className="form-control" name="station" value={this.state.station}
                 onChange={this.handleNewStation}>
-                <option>Achi</option>
-                <option>Uro</option>
-                <option>Gyn</option>
-                <option>IT S1</option>
-                <option>IT S2</option>
+                <option>ACHI</option>
+                <option>URO</option>
+                <option>GYN</option>
+                <option>TRO</option>
+                <option>ITS 1</option>
+                <option>ITS 2</option>
               </select>
             </div>
             <div className="col-sm-2">
@@ -114,7 +115,10 @@
               <select size="1" className="form-control" name="kath_type" value={this.state.kath_type}
                  onChange={this.handleNewKathType}>
                 <option>PDK</option>
-                <option>UKG</option>
+                <option>ISK</option>
+                <option>NFK</option>
+                <option>NIK</option>
+                <option>Sonstige</option>
               </select>
             </div>
             <div className="col-sm-1">

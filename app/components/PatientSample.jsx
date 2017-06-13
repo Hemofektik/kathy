@@ -20,22 +20,24 @@
               </div>
               <div className="col-sm-2">
                 <input type="text" className="form-control" name="psn" value={this.props.data.psn}
-                  placeholder="Name" onChange={this.handleNewPSN} />
+                  placeholder="Nummer/Name" onChange={this.handleNewPSN} />
               </div>
               <div className="col-sm-2">
                 <input type="text" list="processes" 
                     className="form-control" name="process" value={this.props.data.process}
                     onChange={this.handleNewProcess} />
                 <datalist id="processes">
-                  <option>Anlage</option>
+                    <option>Anlage</option>
+                    <option>V</option>
                     <option>VW</option>
                     <option>AV</option>
                     <option>%</option>
-                    <option>% AV</option>
-                    <option>% V</option>
                 </datalist>
               </div>
-
+              <div className="col-sm-6">
+                <textarea type="text" className="form-control" name="remark" value={this.props.data.remark}
+                  placeholder="Reizlos? LR verändert?" onChange={this.handleNewRemark} />
+              </div>
             </div>
           </td>
         </tr> 
@@ -56,7 +58,11 @@
     handleNewPSN: function(event) {
       this.props.data.psn = event.target.value;
       this.setState(this.state);
-    },    
+    },
+    handleNewRemark: function(event) {
+      this.props.data.remark = event.target.value;
+      this.setState(this.state)
+    },
     getInitialState: function() {
       return { 
       };

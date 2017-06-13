@@ -186,6 +186,9 @@
                     <div className="col-sm-2">
                       <label>Visite</label>
                     </div>
+                    <div className="col-sm-6">
+                      <label>Bemerkungen</label>
+                    </div>
                   </td>
                 </tr>
               </thead>

@@ -150,7 +150,7 @@
                   <label className="col-lg-3">Höhe EDK</label>
                   <div className="col-lg-9">
                     <input type="text" className="form-control" name="edk_height" value={this.state.edk_height}
-                        placeholder="z.b. THB" onChange={this.handleNewEDKHeight} />
+                        placeholder="z.b. TH 8/9" onChange={this.handleNewEDKHeight} />
                   </div>
                 </div>
                 <div className="form-group">
@@ -180,7 +180,7 @@
                       <label>PSN</label>
                     </div>
                     <div className="col-sm-2">
-                      <label>Vorgang</label>
+                      <label>Visite</label>
                     </div>
                   </td>
                 </tr>

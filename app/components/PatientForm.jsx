@@ -150,7 +150,7 @@
                   <label className="col-lg-3">Höhe EDK</label>
                   <div className="col-lg-9">
                     <input type="text" className="form-control" name="edk_height" value={this.state.edk_height}
-                        placeholder="z.b. TH 8/9" onChange={this.handleNewEDKHeight} />
+                        placeholder="z.b. TH 7/8" onChange={this.handleNewEDKHeight} />
                   </div>
                 </div>
                 <div className="form-group">
@@ -174,7 +174,7 @@
                 <tr>                
                   <td>
                     <div className="col-sm-2">
-                    <label>Datum Uhrzeit</label>
+                    <label>Datum/Uhrzeit</label>
                     </div>
                     <div className="col-sm-2">
                       <label>PSN</label>

@@ -37,6 +37,16 @@
         init_date: new_init_date
       }));
     },
+    handleNewConditions: function(event) {
+      this.setState(_.extend(this.state, {
+        conditions: event.target.value
+      }));
+    },
+    handleNewEDKHeight: function(event) {
+      this.setState(_.extend(this.state, {
+        edk_height: event.target.value
+      }));
+    },
     addPatient: function(event) {
       if(this.samples.length > 0) {
         this.state.samples = this.samples;
@@ -145,7 +155,7 @@
 
             <div className="col-sm-5">
               <label>Bedingungen / Besonderheiten</label>
-                <textarea rows="3" className="form-control" name="name" value={this.state.conditions}
+                <textarea rows="3" className="form-control" name="conditions" value={this.state.conditions}
                         placeholder="z.b. komplikationslose Anlage" onChange={this.handleNewConditions} >
                 </textarea>
               </div>
@@ -160,8 +170,8 @@
                 <div className="form-group">
                   <label className="col-lg-8">LOR (mm)</label>
                   <div className="col-lg-4">
-                    <input type="text" className="form-control" name="lor" value={this.state.edk_height}
-                        placeholder="z.b. 65" onChange={this.handleNewEDKHeight} />
+                    <input type="text" className="form-control" name="lor" value={this.state.lor}
+                        placeholder="z.b. 65" onChange={this.handleNewLOR} />
                   </div>
                 </div>
                 <div className="form-group">
@@ -219,7 +229,7 @@
         station: "Achi",
         room: "",
         init_date: new Date().toJSON(),
-        kath_type: "PDK" 
+        kath_type: "PDK"
       };
     }
   });

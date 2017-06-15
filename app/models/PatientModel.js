@@ -45,6 +45,8 @@
     this.name = patient.name || "";
     this.kath_type = patient.kath_type || "";
     this.init_date = patient.init_date || "";
+    this.conditions = patient.conditions || "";
+    this.edk_height = patient.edk_height || "";
     this.score = patient.score || 0;
     this.samples = patient.samples || [{ 
         date_time: this.init_date,

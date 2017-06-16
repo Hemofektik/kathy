@@ -47,6 +47,26 @@
         edk_height: event.target.value
       }));
     },
+    handleNewProcedure: function(event) {
+      this.setState(_.extend(this.state, {
+        procedure: event.target.value
+      }));
+    },
+    handleNewVia: function(event) {
+      this.setState(_.extend(this.state, {
+        via: event.target.value
+      }))
+    },
+    handleNewLOR: function(event) {
+      this.setState(_.extend(this.state, {
+        lor: event.target.value
+      }));
+    },
+    handleNewIntrusionDepth: function(event) {
+      this.setState(_.extend(this.state, {
+        intrusion_depth: event.target.value
+      }));
+    },
     addPatient: function(event) {
       if(this.samples.length > 0) {
         this.state.samples = this.samples;
@@ -134,18 +154,18 @@
             <div className="col-sm-1">
               <label className="sr-only" htmlFor="room">Patient</label>
               <input type="text" className="form-control" name="room" value={this.state.room}
-                placeholder="Room" onChange={this.handleNewRoom} />
+                placeholder="Zimmer" onChange={this.handleNewRoom} />
             </div>
             <div className="col-sm-2">
             
             {show_delete_btn ?
-            <button type="button" className="btn btn-danger pull-left" onClick={this.deletePatient}>
+            <button type="button" data-toggle="tooltip" title="Löscht den gesamten Patienten aus der Datenbank!" className="btn btn-danger pull-left" onClick={this.deletePatient}>
               <i className="fa fa-trash-o"></i>
             </button> : null
             }
             <button type="button" className="btn pull-right" onClick={this.close}  ><i className="fa fa-close"></i></button>
             
-            <button type="submit" className="btn pull-right" disabled={disable_save}> <i className="fa fa-save"></i></button>
+            <button type="submit" id="CreatePat" className="btn pull-right" disabled={disable_save}> <i className="fa fa-save"></i></button>
             </div>
           </div>
 
@@ -155,30 +175,48 @@
 
             <div className="col-sm-5">
               <label>Bedingungen / Besonderheiten</label>
-                <textarea rows="3" className="form-control" name="conditions" value={this.state.conditions}
-                        placeholder="z.b. komplikationslose Anlage" onChange={this.handleNewConditions} >
+                <textarea rows="5" className="form-control" name="conditions" value={this.state.conditions}
+                        placeholder="z.B. komplikationslose Anlage" onChange={this.handleNewConditions} >
                 </textarea>
               </div>
-              <div className="col-sm-5">
-                <div className="form-group">
-                  <label className="col-lg-3">Höhe EDK</label>
-                  <div className="col-lg-9">
-                    <input type="text" className="form-control" name="edk_height" value={this.state.edk_height}
-                        placeholder="z.b. TH 7/8" onChange={this.handleNewEDKHeight} />
+              <div className="col-sm-7">
+               <div className="form-group">
+                  <label className="col-lg-5">Operation</label>
+                  <div className="col-lg-4">
+                    <input type="text" className="form-control" name="procedure" value={this.state.procedure}
+                        placeholder="z.B. Laparotomie" onChange={this.handleNewProcedure} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-lg-8">LOR (mm)</label>
+                  <label className="col-lg-5">Höhe EDK</label>
+                  <div className="col-lg-4">
+                    <input type="text" className="form-control" name="edk_height" value={this.state.edk_height}
+                        placeholder="z.B. Th 7/8" onChange={this.handleNewEDKHeight} />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="col-lg-5">Zugangsweg</label>
+                  <div className="col-lg-4">
+                    <select size="1" className="form-control" name="via" value={this.state.via}
+                        onChange={this.handleNewVia}>
+                        <option></option>
+                        <option>Median</option>
+                        <option>Paramedian</option>
+                    </select>
+                  </div>
+                </div> 
+                <div className="form-group">
+                  <label className="col-lg-5">LOR (mm)</label>
                   <div className="col-lg-4">
                     <input type="text" className="form-control" name="lor" value={this.state.lor}
-                        placeholder="z.b. 65" onChange={this.handleNewLOR} />
+                        placeholder="z.B. 65" onChange={this.handleNewLOR} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-lg-8">Einlagetiefe. inkl. Tunnel (mm)</label>
+                  <label className="col-lg-5">Einlagetiefe. inkl. Tunnel (mm)</label>
                   <div className="col-lg-4">
                     <input type="text" className="form-control" name="intrusion_depth" value={this.state.intrusion_depth}
-                        placeholder="z.b. 130" onChange={this.handleNewIntrusionDepth} />
+                        placeholder="z.B. 130" onChange={this.handleNewIntrusionDepth} />
                   </div>
                 </div>
               </div>
@@ -191,7 +229,7 @@
                     <label>Datum/Uhrzeit</label>
                     </div>
                     <div className="col-sm-2">
-                      <label>PSN</label>
+                      <label>PSN/Name</label>
                     </div>
                     <div className="col-sm-2">
                       <label>Visite</label>

@@ -23,16 +23,16 @@
                   placeholder="Nummer/Name" onChange={this.handleNewPSN} />
               </div>
               <div className="col-sm-2">
-                <input type="text" list="processes" 
-                    className="form-control" name="process" value={this.props.data.process}
-                    onChange={this.handleNewProcess} />
-                <datalist id="processes">
+                <select size="1" className="form-control" name="process" value={this.props.data.process}
+                    onChange={this.handleNewProcess} >
                     <option>Anlage</option>
-                    <option>V</option>
                     <option>VW</option>
-                    <option>AV</option>
+                    <option>V</option>
+                    <option>P</option>
                     <option>%</option>
-                </datalist>
+                    <option>AV</option>
+                    <option>Sonstiges</option>
+                </select>
               </div>
               <div className="col-sm-6">
                 <textarea type="text" className="form-control" name="remark" value={this.props.data.remark}

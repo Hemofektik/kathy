@@ -47,6 +47,10 @@
     this.init_date = patient.init_date || "";
     this.conditions = patient.conditions || "";
     this.edk_height = patient.edk_height || "";
+    this.lor = patient.lor || "";
+    this.intrusion_depth = patient.intrusion_depth ||"";
+    this.procedure = patient.procedure || "";
+    this.via = patient.via || "";
     this.score = patient.score || 0;
     this.samples = patient.samples || [{ 
         date_time: this.init_date,
